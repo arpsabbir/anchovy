@@ -2,7 +2,7 @@
 
 
 # ファイルを開く
-path = r"C:\Users\sub\Dropbox\private\Project\python\wiki\test_mecab\result3.txt"
+path = r"C:\Users\sub\Dropbox\private\Project\python\wiki\test_mecab\result4.txt"
 
 f = open(path)
 count = {}
