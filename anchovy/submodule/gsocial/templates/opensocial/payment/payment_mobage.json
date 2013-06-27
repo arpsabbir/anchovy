@@ -1,0 +1,16 @@
+{% load payment_extras %}
+{
+  "callbackUrl": "{{callback_url|escape_json}}",
+  "finishUrl": "{{finish_url|escape_json}}",
+  "entry": [
+    {
+      "itemId": {{item_id|escape_json}},
+      "name": "{{item_name|escape_json}}",
+      "unitPrice": {{item_point|escape_json}},
+      "amount": {{item_quantity|default:1}},
+      "description": "{{item_description|escape_json}}",
+      "imageUrl": "{{item_image_url|escape_json}}"
+    }
+  ]
+}
+

@@ -1,0 +1,376 @@
+# inspectionAPI mbga用
+#    def ngword_validate(self, userid, s):
+#        """
+#        NG ワード検証
+#        s: チェックする文字列
+#        返り値: valid なら True、NG ワードが含まれていたら False を返す
+#        """
+#        data = simplejson.dumps({"data":s})
+#
+#        logging.debug('ngword_validate()')
+#        sj = None
+#        #エラーが出るのでリトライする
+#        for retry_count in xrange(2):
+#            try:
+#                res = self.oauth_request('POST', userid,
+#                        '/api/restful/v1/ngword',
+#                        params = {'_method':'check'},
+#                        data=data, headers={'Content-Type': 'application/json; charset=utf8'}, url_tail='', body_hash=True)
+#                sj = simplejson.loads(res)
+#                logging.debug(sj)
+#                break
+#            except TypeError:
+#                logging.warn("Container: ngword_validate: response type error. retry:%s" % retry_count)
+#                continue
+#        if not sj:
+#            e = self.ResponseError("ngword_validate","simplejson parse error.")
+#            raise e
+#
+#        if 'ngword' in sj:
+#            if 'valid' in sj['ngword']:
+#                return sj['ngword']['valid']
+#            else:
+#                e = self.ResponseError("ngword_validate","No 'valid' in sj['ngword']", sj)
+#                raise e
+#        else:
+#            e = self.ResponseError("ngword_validate","No 'ngword' in sj", sj)
+#            raise e
+
+
+
+
+#    def post_textdata(self, userid, group_name, message, owner_userid=None):
+#        """
+#        TextData エントリに POST
+#        事前に misc/create_textdata.py を改造して実行し group_name を作っておく
+#        """
+##        message = self.encode_emoji(message)
+#        if owner_userid:
+#            data = simplejson.dumps({"data":message, "ownerId":owner_userid})
+#        else:
+#            data = simplejson.dumps({"data":message})
+#
+#        sj = None
+#        #エラーが出るのでリトライする
+#        for retry_count in xrange(2):
+#            try:
+#                res = self.oauth_request('POST', userid,
+#                        '/api/restful/v1/textdata/@app/%s/@all' % (group_name, ),
+#                        data=data, headers={'Content-Type': 'application/json; charset=utf8'}, url_tail='', body_hash=True)
+#                sj = simplejson.loads(res)
+#                break
+#            except TypeError:
+#                logging.warn("Container: post_textdata: response type error. retry:%s" % retry_count)
+#                continue
+#        if not sj:
+#            e = self.ResponseError("post_textdata","Post comment.")
+#            raise e
+#
+#        return sj
+#
+#    def post_textdata_gree(self, userid, message):
+#        """
+#        @deprecated このメソッドは推奨されません。Inspectionクラスを用いるべきです。
+#        TextData エントリに POST（グリー版）
+#        """
+#        message = self.encode_emoji(message)
+#        data = simplejson.dumps({"data":message})
+#
+#        sj = None
+#        #エラーが出るのでリトライする
+#        for retry_count in xrange(2):
+#            try:
+#                res = self.oauth_request('POST', userid,
+#                        '/api/rest/inspection/@app',
+#                        data=data, headers={'Content-Type': 'application/json; charset=utf8'}, url_tail='', body_hash=True)
+#                sj = simplejson.loads(res)
+#                break
+#            except TypeError:
+#                logging.warn("Container: post_textdata_gree: response type error. retry:%s" % retry_count)
+#                continue
+#        if not sj:
+#            e = self.ResponseError("post_textdata_gree","Post comment.")
+#            raise e
+#        return sj
+#
+#    def put_textdata(self, userid, group_name, message, item_id):
+#        """
+#        @deprecated このメソッドは推奨されません。Inspectionクラスを用いるべきです。
+#        TextData エントリの更新(PUT)
+#        事前に misc/create_textdata.py を改造して実行し group_name を作っておく
+#        """
+##        message = self.encode_emoji(message)
+#        data = simplejson.dumps({"data":message})
+#
+#        for retry_count in xrange(3):
+#            try:
+#                res = self.oauth_request('PUT', userid,
+#                        '/api/restful/v1/textdata/@app/%s/@all/%s' % (group_name, str(item_id)),
+#                        data=data, headers={'Content-Type': 'application/json; charset=utf8'}, url_tail='', body_hash=True)
+#                #data = simplejson.loads(res)
+#                break
+#            except TypeError:
+#                logging.warn("Container: put_textdata: response type error. retry:%s" % retry_count)
+#                continue
+#        data = None
+#        return data
+#
+#    def put_textdata_gree(self, userid, message, item_id):
+#        """
+#        @deprecated このメソッドは推奨されません。Inspectionクラスを用いるべきです。
+#        TextData エントリの更新(PUT)
+#        事前に misc/create_textdata.py を改造して実行し group_name を作っておく
+#        """
+#        message = self.encode_emoji(message)
+#        data = simplejson.dumps({"data":message})
+#        for retry_count in xrange(3):
+#            try:
+#                res = self.oauth_request('PUT', userid,
+#                        '/api/rest/inspection/@app/' + str(item_id),
+#                        data=data, headers={'Content-Type': 'application/json; charset=utf8'}, url_tail='', body_hash=True)
+#                break
+#            except TypeError:
+#                logging.warn("Container: put_textdata_gree: response type error. retry:%s" % retry_count)
+#                continue
+#
+#        data = None
+#        return data
+#
+#    def delete_textdata(self, userid, group_name, item_id):
+#        """
+#        @deprecated このメソッドは推奨されません。Inspectionクラスを用いるべきです。
+#        TextData エントリの削除(DELETE)
+#        事前に misc/create_textdata.py を改造して実行し group_name を作っておく
+#        """
+#        path = '/textdata/@app/%s/@all/%s' % (group_name, str(item_id))
+#        for retry_count in xrange(3):
+#            try:
+#                res = self.oauth_request('DELETE', userid, path)
+#                break
+#            except TypeError:
+#                logging.warn("Container: delete_textdata: response type error. retry:%s" % retry_count)
+#                continue
+#        return res
+#
+#    def delete_textdata_gree(self, userid, item_id):
+#        """
+#        @deprecated このメソッドは推奨されません。Inspectionクラスを用いるべきです。
+#        TextData エントリの削除(DELETE) gree用
+#        """
+#        path = '/inspection/@app/' + str(item_id)
+#        for retry_count in xrange(3):
+#            try:
+#                res = self.oauth_request('DELETE', userid, path)
+#                break
+#            except TypeError:
+#                logging.warn("Container: delete_textdata_gree: response type error. retry:%s" % retry_count)
+#                continue
+#        return res
+#
+#    def get_textdata1(self, userid, group_name, item_id):
+#        """
+#        @deprecated このメソッドは推奨されません。Inspectionクラスを用いるべきです。
+#        ID 指定で TextData の取得(TextData API)
+#        事前に misc/create_textdata.py を改造して実行し group_name を作っておく
+#        """
+#        path = '/textdata/@app/%s/@all/%s' % (group_name, str(item_id))
+#        #cache_key = 'osrequest:%s:%s' % (userid, path)
+#        data = None
+#        for retry_count in xrange(2):
+#            try:
+#                res = self.oauth_request('GET', userid, path)
+#                data = simplejson.loads(res)["textData"]["data"]
+#                data = self.decode_emoji(data)
+#                #cache.set(cache_key, data)
+#                break
+#            except TypeError:
+#                logging.warn("Container: get_textdata1: response type error. retry:%s" % retry_count)
+#                continue
+#        if data is None:
+#            data = ''
+#        return data
+#
+#    def get_textdata1_gree(self, userid, item_id):
+#        """
+#        @deprecated このメソッドは推奨されません。Inspectionクラスを用いるべきです。
+#        ID 指定で TextData の取得(TextData API)
+#        """
+#        path = '/inspection/@app/' + str(item_id)
+#        logging.debug(path)
+#        cache_key = 'osrequest:%s:%s' % (userid, path)
+#        data = cache.get(cache_key)
+#        if data is None:
+#            for retry_count in xrange(2):
+#                try:
+#                    res = self.oauth_request('GET', userid, path)
+#                    json = simplejson.loads(res)
+#                    data = u''
+#                    if 'entry' in json:
+#                        if 'data' in json['entry'][0]:
+#                            data = json['entry'][0]['data']
+#                    data = self.decode_emoji(data)
+#                    cache.set(cache_key, data)
+#                    break
+#                except TypeError:
+#                    logging.warn("Container: get_textdata1_gree: response type error. retry:%s" % retry_count)
+#                    continue
+#        if data is None:
+#            data = ''
+#        return data
+#
+#    def get_textdata_json_gree(self, userid, item_id_csv):
+#        """
+#        @deprecated このメソッドは推奨されません。Inspectionクラスを用いるべきです。
+#        Inspection API で、item_id のjsonをまとめて取得。
+#        item_id_csvは、単一のアイテムIDか複数のアイテムIDをカンマで区切って設定する"
+#        simplejsonオブジェクトのまま返す。
+#        リストが欲しいなら、結果の['entry']を取得すること
+#        """
+#        path = '/inspection/@app/' + str(item_id_csv)
+#        cache_key = 'osrequest:get_textdata_json_gree:%s:%s' % (userid, path)
+#        data = cache.get(cache_key)
+#        if data is None:
+#            data = {}
+#            for retry_count in xrange(2):
+#                try:
+#                    res = self.oauth_request('GET', userid, path)
+#                    data = simplejson.loads(res)
+#                    break
+#                except TypeError:
+#                    logging.warn("Container: get_textdata_json_gree: response type error. retry:%s" % retry_count)
+#                    continue
+#
+#            if 'entry' in data:
+#                for text_data in data['entry']:
+#                    if "data" in text_data:
+#                        text_data["data"] = self.decode_emoji(text_data["data"])
+#                cache.set(cache_key, data)
+#        return data
+#
+#
+#    emoji_re = None #encode_emoji,decode_emoji で使う
+#    emoji_decode_re = None #decode_emoji で使う
+#
+#    def encode_emoji(self,text):
+#        """
+#        絵文字をエンコードする。モバゲーのTextDataAPI, GREEのInspectionAPI用。
+#        \ue000 -> &#xe000 に変換
+#        """
+#        if self.emoji_re is None:
+#            self.emoji_re = re.compile(u'[\ue000-\uf0fc]')
+#        def emoji_open(m):
+#            #return hex(ord(m.group(0))).replace('0x','&#x')
+#            return "&#x%x" % ord(m.group(0))
+#        text = self.emoji_re.sub(emoji_open,text)
+#        return text
+#
+#    def decode_emoji(self,text):
+#        """
+#        絵文字をデコードする。モバゲーのTextDataAPI, GREEのInspectionAPI用。
+#        &#xe000 -> \ue000に変換
+#        絵文字じゃない &#xXXXX は空文字にする
+#        """
+#        if self.emoji_re is None:
+#            self.emoji_re = re.compile(u'[\ue000-\uf0fc]')
+#        if self.emoji_decode_re is None:
+#            self.emoji_decode_re = re.compile(r"&#x(\w{4})")
+#        def emoji_close(m):
+#            c = unichr(int(m.group(1),16))
+#            if self.emoji_re.search(c):
+#                return c
+#            else:
+#                return ''
+#        text = self.emoji_decode_re.sub(emoji_close,text)
+#        return text
+#
+#    def post_textdata2(self, group_name, message, owner_os_user_id,writer_os_user_id):
+#        """
+#        TextData エントリに POST
+#        事前に misc/create_textdata.py を改造して実行し group_name を作っておく
+#        2者間でのコメント送信(commentboard)に使用
+#        """
+#        requestor_id = settings.APP_ID
+##        message = self.encode_emoji(message)
+#
+#        data = simplejson.dumps({"data":message, "ownerId":owner_os_user_id, "writerId":writer_os_user_id})
+#        for retry_count in xrange(3):
+#            try:
+#                res = self.oauth_request('POST', requestor_id,
+#                        '/api/restful/v1/textdata/@app/%s/@all' % (group_name, ),
+#                        data=data, headers={'Content-Type': 'application/json; charset=utf8'}, url_tail='', body_hash=True)
+#                sj = simplejson.loads(res)
+#                break
+#            except TypeError:
+#                logging.warn("Container: post_textdata2: response type error. retry:%s" % retry_count)
+#                continue
+#
+#        return sj
+#
+#    def get_textdata_list_by_owner_id(self, group_name, owner_id,count=50,):
+#        """
+#        ユーザーの持つテキストデータのリストを複数取得
+#        simplejsonオブジェクトのまま返す。
+#        リストが欲しいなら、結果の['entry']を取得すること
+#        """
+#
+#        path = '/textdata/@app/%s/@all' % (group_name, )
+#        cache_key = 'osrequest:get_textdata_list_by_owner_id:%s' % (owner_id, )
+#        requestor_id = settings.APP_ID
+#        params = {
+#            'filterBy'    : 'ownerId',
+#            'filterOp'    : 'equals',
+#            'filterValue' : owner_id,
+#            'count'       : count,
+#            'sortBy'      :'updated',
+#            'sortOrder'   :'descending'
+#        }
+#
+#        #data = cache.get(cache_key)
+#        data = None
+#        if data is None:
+#            for retry_count in xrange(2):
+#                try:
+#                    res = self.oauth_request('GET', requestor_id, path, params = params)
+#                    #data = simplejson.loads(res)["textData"]["data"]
+#                    #cache.set(cache_key, data)
+#                    data = simplejson.loads(res)
+#                    break
+#                except TypeError:
+#                    logging.warn("Container: get_textdata_list_by_owner_id: response type error. retry:%s" % retry_count)
+#                    continue
+#            if data is None:
+#                data = {}
+#        if 'entry' in data:
+#            for text_data in data['entry']:
+#                text_data["data"] = self.decode_emoji(text_data["data"])
+#        return data
+#
+#
+#    def get_textdata_json_by_id(self, group_name, item_id):
+#        """
+#        ID 指定で TextData の取得(TextData API)
+#        simplejsonオブジェクトをそのまま返す
+#        モバゲー用
+#        """
+#        path = '/textdata/@app/%s/@all/%s' % (group_name, str(item_id))
+#        #cache_key = 'osrequest:%s:%s' % (userid, path)
+#        requestor_id = settings.APP_ID
+#
+#        #data = cache.get(cache_key)
+#        data = None
+#        if data is None:
+#            for retry_count in xrange(2):
+#                try:
+#                    res = self.oauth_request('GET', requestor_id, path)
+#                    data = simplejson.loads(res)
+#                    #cache.set(cache_key, data)
+#                    break
+#                except TypeError:
+#                    logging.warn("Container: get_textdata_json_by_id: response type error. retry:%s" % retry_count)
+#                    continue
+#            if data is None:
+#                data = {}
+#        if 'textData' in data:
+#            if 'data' in data['textData']:
+#                data['textData']['data'] = self.decode_emoji(data['textData']['data'] )
+#        return data

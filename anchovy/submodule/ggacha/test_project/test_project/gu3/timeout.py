@@ -1,0 +1,2 @@
+class TimeoutError(object):
+    pass

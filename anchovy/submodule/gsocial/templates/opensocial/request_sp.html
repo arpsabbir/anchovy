@@ -1,0 +1,11 @@
+{% if not mobile_image %}
+<a href="request:friends?callbackurl={{ callbackurl }}&title={{ title }}&body={{ body }}&mobile_url={{ mobile_url }}&touch_url={{ touch_url }}&list_type={{ list_type }}&editable={{ editable }}&expire_time={{ expire_time }}&backto_url={{ backto_url }}&to_user_id={{ request_users }}" >
+  {{ submit_value }}
+</a>
+{% endif %}
+
+{% if mobile_image or touch_image %}
+<a href="request:friends?callbackurl={{ callbackurl }}&title={{ title }}&body={{ body }}&mobile_url={{ mobile_url }}&touch_url={{ touch_url }}&mobile_image={{ mobile_image }}&touch_image={{ touch_image }}&list_type={{ list_type }}&editable={{ editable }}&expire_time={{ expire_time }}&backto_url={{ backto_url }}&to_user_id={{ request_users }}" >
+  {{ submit_value }}
+</a>
+{% endif %}

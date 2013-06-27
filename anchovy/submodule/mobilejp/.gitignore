@@ -1,0 +1,15 @@
+*.pyc
+*.pyo
+*~
+*.orig
+*.swp
+.DS_Store
+var
+Thumbs.db
+.pydevproject
+.project
+#*
+.#*
+\#*#
+hashi_development*.py
+ryoma/tools/gdd/data/

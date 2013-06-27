@@ -1,0 +1,23 @@
+<form action="request:friends" method="post">
+
+{% if request_users %}
+{% for user in request_users %}
+<input type="checkbox" name="to_user_id[]" value="{{ user.id }}" checked />&nbsp;{{ user.nickname }}<br />
+{% endfor %}
+{% endif %}
+
+<input type="hidden" name="callbackurl" value="{{ callbackurl }}" />
+<input type="hidden" name="title" value="{{ title }}" />
+<input type="hidden" name="body" value="{{ body }}" />
+<input type="hidden" name="mobile_url" value="{{ mobile_url }}" />
+<input type="hidden" name="touch_url" value="{{ touch_url }}" />
+
+<input type="hidden" name="mobile_image" value="{{ mobile_image }}" />
+<input type="hidden" name="touch_image" value="{{ touch_image }}" />
+<input type="hidden" name="list_type" value="{{ list_type }}" />
+<input type="hidden" name="editable" value="{{ editable }}" />
+<input type="hidden" name="expire_time" value="{{ expire_time }}" />
+<input type="hidden" name="backto_url" value="{{ backto_url }}" />
+
+<input type="submit" value="{{ submit_value }}" />
+</form>

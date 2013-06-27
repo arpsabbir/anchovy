@@ -1,0 +1,20 @@
+[
+    {
+        "pk": 3,
+        "model": "spam.Test",
+        "fields": {
+            "name": "\u30cf\u30a4\u30dd\u30fc\u30b7\u30e7\u30f3",
+            "value": 300,
+            "detail_text": "HP\u3092500\u56de\u5fa9\u3057\u307e\u3059"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "spam.Test",
+        "fields": {
+            "name": "\u30a8\u30ea\u30af\u30b5\u30fc",
+            "value": 400,
+            "detail_text": "HP/MP\u3092\u5168\u56de\u5fa9\u3057\u307e\u3059"
+        }
+    }
+]

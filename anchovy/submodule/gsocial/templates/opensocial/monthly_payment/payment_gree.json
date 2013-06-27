@@ -1,0 +1,8 @@
+{% load payment_extras %}
+{
+  "serviceid":"{{serviceid|escape_json}}",
+  "provider":"{{provider|escape_json}}",
+  "imageUrl":"{{image_url|escape_json}}",
+  "callbackUrl":"{{callback_url|escape_json}}",
+  "finishPageUrl":"{{finish_url|escape_json}}",
+}

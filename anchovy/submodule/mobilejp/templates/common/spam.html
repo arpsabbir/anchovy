@@ -1,0 +1,29 @@
+<div style="text-align:center;clear:both;">
+  <form action="." method="get">
+    <input type="text" value="{{ domain|escape }}" size="6" />
+    <input type="submit" value="受信設定追加" />
+  </form>
+</div>
+
+{% if device.is_docomo %}
+<div>
+  <span style="color:{{ color|escape }};">「迷惑ﾒｰﾙ対策」</span>⇒<span style="color:{{ color|escape }};">「受信/拒否設定」</span>を選択。<span style="color:{{ color|escape }};">「ｽﾃｯﾌﾟ3」</span>で<span style="color:{{ color|escape }};">「受信設定」</span>⇒<span style="color:{{ color|escape }};">「個別に受信したいﾄﾞﾒｲﾝ」</span>のﾘｽﾄに<span style="color:{{ color|escape }};">{{ domain|escape }}</span>を貼り付けてください。
+</div>
+<div style="text-align:center;">
+  {% comment %}{% emoji "imode" %}{% endcomment %}<a href="http://docomo.ne.jp/cp/mailsetst.cgi">設定を変更する</a>
+</div>
+{% endif %}
+
+{% if device.is_ezweb %}
+<div>
+  <span style="color:{{ color|escape }};">「ﾒｰﾙﾌｨﾙﾀｰ」</span>⇒<span style="color:{{ color|escape }};">「ｱﾄﾞﾚｽﾌｨﾙﾀｰ」</span>⇒<span style="color:{{ color|escape }};">「指定受信」</span>を選択。<span style="color:{{ color|escape }};">「個別指定」</span>の入力欄で<span style="color:"red;">{{ domain|escape }}</span>を貼り付けてください。 
+</div>
+<div style="text-align:center;">
+  {% comment %}{% emoji "phone_to" %}{% endcomment %}<a href="http://www.au.kddi.com/cgi-bin/wau/meiwaku.cgi">設定を変更する</a>
+</div>
+{% endif %}
+
+{% if device.is_softbank or device.is_nonmobile %}
+  <span style="color:{{ color|escape }};">「My Softbank」</span>⇒<span style="color:{{ color|escape }};">「各種変更手続き」</span>⇒<span style="color:{{ color|escape }};">「ｵﾘｼﾞﾅﾙﾒｰﾙ設定」</span>
+を選択。<span style="color:{{ color|escape }};">「迷惑ﾒｰﾙ関連設定」</span>⇒<span style="color:{{ color|escape }};">「受信可否設定」</span>⇒<span style="color:{{ color|escape }};">「許可ﾘｽﾄとして設定」</span>。<span style="color:{{ color|escape }};">「個別ｱﾄﾞﾚｽの追加」</span>を選択、<span style="color:{{ color|escape }};">{{ domain|escape }}</span>を貼り付けください。
+{% endif %}

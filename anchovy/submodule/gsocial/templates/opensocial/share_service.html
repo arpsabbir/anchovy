@@ -1,0 +1,22 @@
+<script type="text/javascript">
+<!--
+function share_service(){
+GREE.ui(
+	{
+	'method': 'share',
+	'message': '{{ message }}',
+	'image_urls': {
+	'240': '{{ img_url_240 }}',
+	'640': '{{ img_url_640 }}',
+	'75': '{{ img_url_75}}',
+	},
+	'callback_url' : '{{ callback_url }}',
+	}
+);
+
+}
+// -->
+</script>
+<form action="javascript:void(0)">
+	<input value="{{ value }}" type="button" onClick="share_service()">
+</form>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+  <ModulePrefs title="{{ app_name }}">
+    <Require feature="opensocial-0.8" />
+    <Link rel="event.addapp" href="http://{{ domain }}/m/appevent/add/" method="GET" options="user_hash"/>
+    <Link rel="event.removeapp" href="http://{{ domain }}/m/appevent/remove/" method="GET" />
+    <Link rel="gree.join_community" href="http://{{ domain }}/m/appevent/community/join/" method="GET" />
+    <Link rel="gree.leave_community" href="http://{{ domain }}/m/appevent/community/leave/" method="GET" />
+    <Link rel="gree.invite_callback_url" href="http://{{ domain_fp }}/m/invitation/invite/" method="GET"/>
+    <Link rel="touch.invite_callback_url" href="http://{{ domain }}/m/invitation/invite_touch/" method="GET"/>
+  </ModulePrefs>
+  <Content type="url" view="mobile" href="http://{{ domain_fp }}{{ app_root_path|default:'/m/' }}" />
+  <Content type="url" view="touch" href="http://{{ domain_sp }}{{ app_root_path|default:'/m/' }}" />
+</Module>

@@ -1,0 +1,17 @@
+<script type="text/javascript">
+<!--
+function invite_service(){
+GREE.ui(
+	{
+	'method': 'invite',
+	'body': '{{ message }}',
+	'to_user_ids' : '{{ to_user_ids }}',
+	'callback_url' : '{{ callback_url }}',
+	}
+);
+}
+// -->
+</script>
+<form action="javascript:void(0)">
+	<input value="{{ value }}" type="button" onClick="invite_service()">
+</form>

@@ -1,0 +1,110 @@
+class PeopleMixi(PeopleBase):
+    """
+    PeopleAPIを使う（mixi用）
+
+    プラットフォームからのレスポンス（JSON）のキーに関して
+        greeとmixiは'entry'キー、mobageは'person'キーを利用する
+    """
+    pass
+
+    def get_myself(self, userid, fields=None, caching=True):
+        """
+        アプリを利用しているユーザー本人の情報を取得し、entryキーのバリューを返す
+        なければ、Noneを返す
+        """
+        data = self.get_myself_data(userid, fields, caching)
+
+        if data:
+            if 'entry' in data:
+                return data['entry']
+
+        return None
+
+    def get_friend(self, userid, friend_userid, has_app=True, fields=None):
+        """
+        アプリを利用しているユーザーのID指定した友達の情報を取得し、entryキーのバリューを返す
+        なければ、Noneを返す
+        """
+        data = self.get_friend_data(userid, friend_userid, has_app, fields)
+
+        if data:
+            if 'entry' in data:
+                ret = data.get('entry', [])
+            else:
+                ret = None
+
+        if not ret:
+            return None
+        return ret[0] if isinstance(ret, (list, tuple)) else ret
+
+    def get_friends(self, userid, has_app=True, fields=None):
+        """
+        アプリを利用しているユーザーの友達情報を取得し、entryキーのバリューを返す
+        """
+        data = self.get_friends_data(userid, has_app, fields)
+
+        if data is None:
+            res = self.oauth_request('GET', userid, path, params=params)
+            if res:
+                try:
+                    data = simplejson.loads(res)
+                    cache.set(cache_key, data)
+                except:
+                    logging.error(u'simplejson loads error: userid %s, path %s' % (userid,path))
+                    logging.error(res)
+                    try:
+                        data = simplejson.loads(unicode(res,"utf-8","ignore"))
+                        cache.set(cache_key, data)
+                    except:
+                        logging.error(u'simplejson loads with ignore error:userid %s, path %s' % (userid,path))
+                        logging.error(res)
+                        data = {"error":True,"entry":[]}
+            else:
+                logging.error(u'oauth request error: userid %s, path %s, res None' % (userid,path))
+
+        if data is None:
+            data = {'error':True, 'entry':[], 'totalResults': 0, 'itemsPerPage': 0}
+        return data
+
+    def get_friends_page(self, userid, has_app=True, fields=None, page=1, limit=10):
+        """
+        アプリを利用しているユーザーの友達情報を指定件数分返す
+        件数指定がない場合は10件
+
+        ※必要なときに追加
+        """
+        pass
+
+    def get_albums(self, userid):
+        """
+        アルバム情報を取得する
+        未リファクタ、mixi固有
+        """
+        params = {'format':'json'}
+        path = '/albums/@me/@self'
+        res = self.oauth_request('GET', userid, path, params=params)
+        if res:
+            data = simplejson.loads(unicode(res,"utf-8","ignore"))
+        else:
+            logging.error(u'oauth request error: userid %s, path %s ' % (userid,path))
+            data = {"error":True,"entry":[]}
+        return data
+
+    def get_album_photos(self, userid, album_id, count=0, start=0):
+        """
+        写真情報を取得する
+        未リファクタ、mixiとmobage固有
+        """
+        params = {'format':'json'}
+        if start:
+            params['startIndex'] = start
+        if count:
+            params['count'] = count
+        path = '/mediaitems/@me/@self/' + str(album_id)
+        res = self.oauth_request('GET', userid, path, params=params)
+        if res:
+            data = simplejson.loads(unicode(res,"utf-8","ignore"))
+        else:
+            logging.error(u'oauth request error: userid %s, path %s ' % (userid,path))
+            data = {"error":True,"entry":[],'totalResults':0}
+        return data

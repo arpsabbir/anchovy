@@ -1,0 +1,31 @@
+#    #----------------------------- モバゲー専用 ------------------------------
+#    def get_mbga_avatar_self(self, userid, params=''):
+#        "アバター API"
+#        path = '/avatar/%s/@self/%s' % (userid, params)
+#        cache_key = 'osrequest:%s:%s' % (userid, path)
+#        data = cache.get(cache_key)
+#        if data is None:
+#            res = self.oauth_request('GET', userid, path)
+#            if res:
+#                try:
+#                    data = simplejson.loads(res)
+#                    cache.set(cache_key, data)
+#                except:
+#                    logging.error(u'simplejson loads error: userid %s, path %s' % (userid,path))
+#                    logging.error(res)
+#                    try:
+#                        data = simplejson.loads(unicode(res,"utf-8","ignore"))
+#                        cache.set(cache_key, data)
+#                    except:
+#                        logging.error(u'simplejson loads with ignore error:userid %s, path %s' % (userid,path))
+#                        logging.error(res)
+#            else:
+#                logging.error(u'oauth request error: userid %s, path %s, res None' % (userid,path))
+#        if data:
+#            if "avatar" in data:
+#                logging.debug(data["avatar"])
+#                return data["avatar"]
+#            else:
+#                return None
+#        else:
+#            return None

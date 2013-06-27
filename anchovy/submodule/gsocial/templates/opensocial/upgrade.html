@@ -1,0 +1,18 @@
+<script type="text/javascript">
+<!--
+function share_service(){
+
+GREE.ui(
+	{
+	'method': 'upgrade',
+	'grade': '{{ grade }}',
+	'callback_url' : '{{ callback_url }}'
+	}
+);
+
+}
+// -->
+</script>
+<form action="javascript:void(0)">
+	<input value="{{ value }}" type="button" onClick="share_service()">
+</form>

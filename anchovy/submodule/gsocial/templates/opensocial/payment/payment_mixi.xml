@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom"
+       xmlns:app="http://www.w3.org/2007/app"
+       xmlns:point="http://mixi.jp/atom/ns#point">
+  <title />
+  <id />
+  <updated />
+  <author><name /></author>
+  <content type="text/xml">
+    <point:url callback_url="{{callback_url}}" finish_url="{{finish_url}}" />
+    <point:items>
+      <point:item id="{{item_id}}" name="{{item_name}}" point="{{item_point}}" />
+    </point:items>
+    {% if is_test %}<point:status is_test="true" />{% endif %}
+  </content>
+</entry>

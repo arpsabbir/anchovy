@@ -1,0 +1,20 @@
+[
+    {
+        "pk": 1,
+        "model": "spam.Test",
+        "fields": {
+            "name": "\uff77\uff6d\uff71\uff9b\uff6f\uff84\uff9e",
+            "value": 200,
+            "detail_text": "\u884c\u52d5\u529b\u3092100%\u56de\u5fa9\u3002"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "spam.Test",
+        "fields": {
+            "name": "\uff8c\uff6b\uff70\uff7d\uff9b\uff6f\uff84\uff9e",
+            "value": 50,
+            "detail_text": "\u653b\u9a0e\u529b/\u9632\u9a0e\u529b\u3092100%\u56de\u5fa9\u3002"
+        }
+    }
+]

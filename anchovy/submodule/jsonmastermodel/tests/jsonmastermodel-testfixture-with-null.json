@@ -1,0 +1,11 @@
+[
+    {
+        "pk": 1,
+        "model": "spam.Test",
+        "fields": {
+            "name": null,
+            "value": null,
+            "detail_text": null
+        }
+    }
+]

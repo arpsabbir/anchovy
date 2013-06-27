@@ -1,0 +1,115 @@
+gree: &gree
+    id: 1
+    container: "gree"
+    name: "gree"
+    sandbox: "os-sb.gree.jp"
+    hex_cert: ""
+    endpoint: "os.gree.jp"
+    endpoint_fp: "os.gree.jp"
+    endpoint_sp: "os.gree.jp"
+    endpoint_webview: "os.gree.net"
+    api_url_tail: "/api/rest"
+    app_url: "http://mgadget.gree.jp/%(app_id)s"
+    app_url_sp: "http://pf.gree.jp/%(app_id)s"
+    media_url: "http://mgadget.gree.jp/%(app_id)s"
+    spacer_url: "%(spacer_url)s/images/mobile/240/spacer.gif"
+    profile_url: "http://m.gree.jp/?mode=profile&act=look&ucode=%(userid)s"
+    profile_url_sp: "http://t.gree.jp/%(userid)s"
+    payment_success_status: "2"
+    payment_cancel_status: "3"
+    payment_info_template: "payment_gree.json"
+
+gree_net: &gree_net
+    <<: *gree
+    id: 2
+    name: "gree"
+    sandbox: "os-sb.gree.net"
+    endpoint: "os.gree.net"
+    app_url: "http://mgadget.gree.net/%(app_id)s"
+    app_url_sp: "http://pf.gree.net/%(app_id)s"
+    media_url: "http://mgadget.gree.net/%(app_id)s"
+    profile_url: "http://m.gree.net/?mode=profile&act=look&ucode=%(userid)s"
+    profile_url_sp: "http://t.gree.net/%(userid)s"
+
+sb.gree: &sb_gree
+    <<: *gree
+    id: 3
+    name: "sb.gree"
+    endpoint_fp: "os-sb.gree.jp"
+    endpoint_sp: "os-sb.gree.jp"
+    endpoint_webview: "os-sb.gree.net"
+    api_url_tail: "/api/rest"
+    app_url: "http://mgadget-sb.gree.jp/%(app_id)s"
+    app_url_sp: "http://pf-sb.gree.jp/%(app_id)s"
+    media_url: "http://mgadget-sb.gree.jp/%(app_id)s"
+
+sb.gree_net: &sb_gree_net
+    <<: *gree_net
+    id: 4
+    name: "sb.gree_net"
+    endpoint: "os-sb.gree.net"
+    api_url_tail: "/api/rest"
+    app_url: "http://mgadget-sb.gree.net/%(app_id)s"
+    app_url_sp: "http://pf-sb.gree.net/%(app_id)s"
+    media_url: "http://mgadget-sb.gree.net/%(app_id)s"
+
+
+mobage: &mobage
+    id: 5
+    container: "mobage"
+    name: "mobage"
+    sandbox: "sb.mobage"
+    hex_cert: ""
+    endpoint: "app.mbga.jp"
+    api_url_tail: "/api/restful/v1"
+    app_url: "http://pf.mbga.jp/%(app_id)s/"
+    media_url: "http://pf.mbga.jp/%(app_id)s/"
+    spacer_url: "http://ava-a.mbga.jp/i/dot.gif"
+    profile_url: "http://mbga.jp/_u?u=%(userid)s"
+    payment_success_status: 10
+    payment_cancel_status: 20
+    payment_info_template: "payment_mobage.json"
+
+sb.mobage: &sb_mobage
+    <<: *mobage
+    id: 6
+    container: "mobage"
+    name: "sb.mobage"
+    sandbox: "sb.mbga.jp"
+    hex_cert: ""
+    endpoint: "sb.app.mbga.jp"
+    app_url: "http://sb.pf.mbga.jp/%(app_id)s/"
+    media_url: "http://sb.pf.mbga.jp/%(app_id)s/"
+    profile_url: "http://sb.mbga.jp/_u?u=%(userid)s"
+
+mixi: &mixi
+    id: 7 
+    container: "mixi"
+    name: "mixi"
+    sandbox: "mixi.jp" # no sandbox. use self
+    hex_cert: "0xB891692E4DB7ABF7177421693F1471AAB3A6C067DDE074AC8F52794253B77C6EEFF9AF1B73FE9797EFE6A038342310B4A7344946B96038CFFFF37DA5312D0DBD1FE39C3F011A92FB619EE6D830590BE518F86FF94328BA154DE76A55F7CCB150321DA5A08E59AE3C052D3B50319D07D958EEAD132B447EC2C61773EB4655532B"
+    endpoint: "api.mixi-platform.com"
+    api_url_tail: "/os/0.8"
+    app_url: "http://ma.mixi.net/%(app_id)s/"
+    media_url: "http://mm.mixi.net/%(app_id)s/"
+    spacer_url: "http://mm.mixi.net/img/dot0.gif"
+    profile_url: "http://m.mixi.jp/show_friend.pl?id=%(userid)s"
+    payment_success_status: "10"
+    payment_cancel_status": "20"
+    payment_info_template: "payment_mixi.xml"
+
+default:
+    id: 10 
+    container: "default"
+    name: "default"
+    endpoint: "api.mixi-platform.com"
+    spacer_url: "%(media_url)s/images/mobile/240/spacer.gif"
+
+
+local.sb.gree: 
+    <<: *sb_gree 
+    id: 111
+
+local.sb.mobage: 
+    <<: *sb_mobage
+    id: 112
