@@ -44,6 +44,15 @@ CACHES = {
         },
     }
 
+# Redis
+REDIS_DATABASES = {
+    'default': {
+        'HOST': 'localhost',
+        'PORT': '6379',
+        'DB': '0',
+        }
+}
+
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -177,10 +186,14 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'south',
 )
 
 INSTALLED_APPS += (
     'module.download',
+    'module.common',
+    'module.ita',
+    'module.res',
 )
 
 # submodules

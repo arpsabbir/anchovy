@@ -10,9 +10,12 @@
     </facet>
   </component>
   <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$/anchovy" />
+    <content url="file://$MODULE_DIR$/anchovy">
+      <sourceFolder url="file://$MODULE_DIR$/anchovy/submodule" isTestSource="false" />
+    </content>
     <orderEntry type="jdk" jdkName="Python 2.7.3 (/Library/Frameworks/Python.framework/Versions/2.7/bin/python)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="PROVIDED" name="sass-stdlib" level="application" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />

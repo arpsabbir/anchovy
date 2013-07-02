@@ -8,6 +8,9 @@ class Download(object):
     lines = []
 
     def __init__(self, url_string):
+        self.url = url_string
+        self.lines = []
+
         # download
         f = self._download(url_string)
 
